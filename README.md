@@ -3,8 +3,8 @@ Assignments
 
 This is the [CSE-20289-SP17] reading and homework assignments repository for:
 
-* **Name**:  Dommer McDomerson
-* **NetID**: dmcdomers
+* **Name**:  Jeff Klouda
+* **NetID**: jklouda1
 
 Readings
 --------
