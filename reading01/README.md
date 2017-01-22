@@ -7,22 +7,27 @@ $ du -h /etc/ 2> /dev/null | sort -h > output.txt
 ```
 
 **a.** What is the purpose of the `|` ?
-    The `|` pipes the standard output of the `du` command into the standard input of the `sort` command.
+
+The `|` pipes the standard output of the `du` command into the standard input of the `sort` command.
 
 **b.** What is the purpose of the `2> /dev/null` ?
-    The 2> /dev/null redirects the standard error to /dev/null, effectively suppressing error messages from the command.
+
+The 2> /dev/null redirects the standard error to /dev/null, effectively suppressing error messages from the command.
 
 **c.** What is the purpose of the `> output.txt` ?
-    The > output.txt redirects the standard output of the sort command, writing it to output.txt.
+
+The > output.txt redirects the standard output of the sort command, writing it to output.txt.
 
 **d.** What is the purpose of the `-h` flags?
-    The -h flags format the outputs of the du and sort commands in human-readable format, representing file sizes in kb, mb, etc. rather than bytes. 
+
+The -h flags format the outputs of the du and sort commands in human-readable format, representing file sizes in kb, mb, etc. rather than bytes. 
 
 **e.** Is the following command the same as the one above? Explain.
 ```
 $ du -h /etc/ | sort -h > output.txt 2> /dev/null
 ```
-    This command is not equivalent to the one above because it redirects the standard error from the sort command to /dev/null rather than that of the du command.
+
+This command is not equivalent to the one above because it redirects the standard error from the sort command to /dev/null rather than that of the du command.
 
 ### Question 2
 
@@ -59,13 +64,16 @@ cat 200{2..4}-{09..12}
 ```
 
 **a.** Which files are executable by the owner?
-    `Huxley` and `Tux` (---x------)
+
+`Huxley` and `Tux` (---x------)
 
 **b.** Which files are readable by the members of the `users` group?
-    `Huxley` and `Tux` (----r-----)
+
+`Huxley` and `Tux` (----r-----)
 
 **c.** Which files are writable by anyone (ie. the world)?
-    None (--------w-)
+
+None (--------w-)
 
 **d.** What command would you execute so that `Tux` had the same permissions as `Huxley`?
 ```
@@ -83,16 +91,21 @@ $ bc
 ```
 
 **a.** How would you suspend the `bc` process?
-    ctrl + z
+
+ctrl + z
 
 **b.** How would you resume the `bc` process?`
-    `fg` or `fg %[jobspec]` if there is more than one job
+
+`fg` or `fg %[jobspec]` if there is more than one job
 
 **c.** How would you signal the end of input to the `bc` process?
-    ctrl + d
+
+ctrl + d
 
 **d.** If the `bc` process was still running, how would you terminate the `bc` process?
-    ctrl + c
+
+ctrl + c
 
 **e.** If the `bc` process was still running, how would you terminate the `bc` process from another terminal?
-    `kill -1 bc` or `kill -1 %[jobspec]`
+
+`kill -1 bc` or `kill -1 %[jobspec]`
