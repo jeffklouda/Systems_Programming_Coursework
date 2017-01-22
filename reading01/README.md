@@ -6,23 +6,23 @@ Reading 01
 $ du -h /etc/ 2> /dev/null | sort -h > output.txt
 ```
 
-**a.** What is the purpose of the | ?
-    The | pipes the standard output of the du command into the standard input of the sort command.
+**a.** What is the purpose of the `|` ?
+    The `|` pipes the standard output of the `du` command into the standard input of the `sort` command.
 
-**b.** What is the purpose of the 2> /dev/null ?
+**b.** What is the purpose of the `2> /dev/null` ?
     The 2> /dev/null redirects the standard error to /dev/null, effectively suppressing error messages from the command.
 
-**c.** What is the purpose of the > output.txt ?
+**c.** What is the purpose of the `> output.txt` ?
     The > output.txt redirects the standard output of the sort command, writing it to output.txt.
 
-**d.** What is the purpose of the -h flags?
+**d.** What is the purpose of the `-h` flags?
     The -h flags format the outputs of the du and sort commands in human-readable format, representing file sizes in kb, mb, etc. rather than bytes. 
 
 **e.** Is the following command the same as the one above? Explain.
-    This command is not equivalent to the one above because it redirects the standard error from the sort command to /dev/null rather than that of the du command.
 ```
 $ du -h /etc/ | sort -h > output.txt 2> /dev/null
 ```
+    This command is not equivalent to the one above because it redirects the standard error from the sort command to /dev/null rather than that of the du command.
 
 ###Question 2
 
