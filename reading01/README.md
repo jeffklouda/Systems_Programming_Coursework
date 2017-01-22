@@ -1,7 +1,7 @@
 Reading 01
 ==========
 
-###Question 1
+### Question 1
 ```
 $ du -h /etc/ 2> /dev/null | sort -h > output.txt
 ```
@@ -24,7 +24,7 @@ $ du -h /etc/ | sort -h > output.txt 2> /dev/null
 ```
     This command is not equivalent to the one above because it redirects the standard error from the sort command to /dev/null rather than that of the du command.
 
-###Question 2
+### Question 2
 
 **a.** How would you concatenate all the files from 2002 into one file?
 ```
@@ -51,7 +51,7 @@ cat 200{2..9..2}-{01..12..2}
 cat 200{2..4}-{09..12}
 ```
 
-###Question 3
+### Question 3
 ```
 -rw------- 1 pbui users 0 Jan 18 07:19 Beastie
 -rwxr-xr-x 1 pbui users 0 Jan 18 07:18 Huxley
@@ -77,7 +77,7 @@ chmod o+rx Tux
 chmod g-rx Tux
 ```
 
-###Question 4
+### Question 4
 ```
 $ bc
 ```
