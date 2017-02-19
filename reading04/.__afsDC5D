@@ -1,0 +1,189 @@
+\documentclass[letterpaper]{article}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+
+\begin{document}
+
+% Title -----------------------------------------------------------------------
+
+\title{Reading 04: Diversity At Notre Dame}
+\date{February 15, 2017}
+\author{Jeff Klouda {\textless}jklouda1@nd.edu{\textgreater}}
+
+\maketitle
+
+% Overview --------------------------------------------------------------------
+
+\section*{Overview}
+
+\paragraph{
+I used shell scripts and Gnuplots to analyze the gender and ethnicity data
+of the students in Notre Dame's Computer Science program.  Plotting this data
+from the classes of 2013 through 2019 as provided by Ramzi Bualuan of the 
+Computer Science department, I was able to identify norms and trends in
+diversity in the program.  The program has increased in size every year since
+2014, and the students in the progrma have been and are largely Caucasian and
+male.  While there have generally been more female students each year than in
+the previous, they are still outnumbered by their male peers nearly two to
+one, and while there has been a slight increase in the number of 
+non-Caucasian students, there are still far more Caucasian students in the
+program than students of other ethnicities.
+}
+
+% Methodology -----------------------------------------------------------------
+
+\section*{Methodology}
+
+\paragraph{
+To process the {\tt demographics.csv} data I used the two shell scripts 
+printed below, gender.sh and ethnic.sh, that function similarly.  Each script
+relies on a function that takes two input arguments; the count\_gender 
+function in gender.sh takes the year and the gender to be totaled.  With 
+these, it sets the column to search based on the year because the data in the
+provided .csv if organized in columns by year.  It then uses the gender 
+argument to determine what character to count in that column.  These 
+variables are then used in the pipeline at the end of the function.  curl 
+downloads the data from the specified URL, cut takes the specified column 
+based on the comma delimiter, grep finds all lines in that column matching 
+the specified gender, and wc -l lists the number of lines in that output, 
+counting the number of matches.  This outputs the number of students of the 
+specified gender in the specified year.  This pipeline runs in the for loop 
+at the bottom of the script, calculating the number of students of each 
+gender in each year present in the data and using echo to output this data in
+the form of (year) (# of female students) (# of male students).  ethnic.sh 
+functions in exactly the same way, but instead of taking gender as the 
+second argument of its count\_ethnic function, it takes ethnicity as
+represented by the characters C, O, S, B, N, T, and U.  The function uses
+these characters in a pieline identical to that used in the gender.sh script
+to generate totals for students of each ethnicities in each year.  This 
+function is run in the for loop at the bottom of the script for each
+ethnicity each year, producing output in the for of the year followed by 
+the number of students of each ethnicity in the data.
+\par
+To produce the graphs in Figures {\ref fig:gender }and {\ref fig:ethnic}, I first
+ran the gender.sh and ethnic.sh scripts to store the information from the 
+demographics csv in tables in gender.dat and ethnic.dat.  This data can be 
+seen in Tables {\ref tbl:gender} and {\ref tbl:ethnic}.  I then used these .dat
+files and the provided .plt files and Makefile to plot the demographics data
+in the gender.png and ethnic.png files.
+\par
+I did not have too much difficulty extracting data or plotting it 
+because of how much of the necessary code was provided in the Reading04 
+assignment.  One aspect that I did struggle with was writing the arithmetic
+expression to determine the column based on the year.  I was trying to use
+the expr command, but it was not compatible with the way in which I was
+formatting my expression.  I was able to use the arithmetic expression
+\$(( )) notation instead to solve this problem.
+}
+
+% Code Listings
+
+\lstinputlisting{gender.sh}
+\label{gender.sh}
+\lstinputlisting{ethnic.sh}
+\label{ethnic.sh}
+
+% TODO: REMOVE and EDIT
+This briefly describes how you processed the {\tt demographics.csv} data and
+how you produced the graphs. In particular, it should discuss any interesting
+or frustrating problems you faced and how you overcame them. You may include
+\href{https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings}{code listings}
+of your shell scripts if you wish (as long as you provide some description to
+accompany the code).
+
+% Analysis --------------------------------------------------------------------
+
+\section*{Analysis}
+
+% TODO: INSERT TABLE
+
+\begin table h!
+    \centering
+    \begin tabular r|l|c
+    Year & Female & Male\\
+    2013 & 14 & 49\\
+    2014 & 12 & 44\\
+    2015 & 16 & 58\\
+    2016 & 19 & 60\\
+    2017 & 26 & 65\\
+    2018 & 36 & 90\\
+    2019 & 51 & 97\\
+    \end tabular
+    \caption CSE Student Genders per Year
+    \label tbl:gender
+\end table
+
+\begin table h!
+    \centering
+    \begin tabular r|l|c
+    Year & Caucasian & Asian & Hispanic & African American & Native American
+    & Multiple Selection & Undeclared\\
+    2013 & 43 & 7 & 7 & 3 & 1 & 2 & 0\\
+    2014 & 43 & 5 & 4 & 2 & 1 & 1 & 0\\
+    2015 & 47 & 9 & 10 & 4 & 1 & 1 & 2\\
+    2016 & 53 & 9 & 9 & 1 & 7 & 0 & 0\\
+    2017 & 60 & 12 & 3 & 5 & 5 & 6 & 0\\
+    2018 & 91 & 8 & 12 & 3 & 4 & 8 & 0\\
+    2019 & 92 & 13 & 10 & 3 & 15 & 14 & 0\\
+    \end tabular
+    \caption CSE Student Genders per Year
+    \label tbl:ethnic
+\end table
+
+\paragraph{}
+
+% TODO: REMOVE and EDIT
+This should provide tables that summarize the {\tt demographics.csv} data and
+graphs that provide insight into the questions:
+
+% TODO: INSERT FIGURE
+
+\begin{enumerate}
+
+\item{}What is the overall trend in gender balance in the Computer Science and
+    Engineering program at the University of Notre Dame?
+
+\item{}How has ethnic diversity changed over time in the Computer Science and
+    Engineering program at the University of Notre Dame?
+
+\end{enumerate}
+
+% TODO: INSERT FIGURE
+
+You should accompany these tables and graphs with some commentary on the
+meaning of the data and plots.
+
+\paragraph{}
+
+% Discussion ------------------------------------------------------------------
+
+\section*{Discussion}
+
+\paragraph{}
+
+% TODO: REMOVE and EDIT
+This final section is an opportunity for you to reflect on the issue of
+creating a {\bf welcoming} and {\bf supportive} learning environment at the
+University of Notre Dame. For instance, you may wish to discuss any of the
+following questions:
+
+\begin{enumerate}
+
+\item{}Are the issues of gender and ethnic diversity important to you? Should
+    the department work to increase diversity? Should the technology industry
+    	try to improve workplace diversity? Why or why not?
+
+\item{}Does the Computer Science and Engineering department provide a welcoming
+    and supportive learning environment to all students? In what ways can it
+    	improve?
+
+\item{}What challenges have you experienced thus far in the Computer Science
+    and Engineering program? How could the department or university better
+    	support you?
+
+\end{enumerate}
+
+\end{document}
