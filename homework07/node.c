@@ -71,8 +71,8 @@ void            node_dump(struct node *n, FILE *stream) {
  * @return  < 0 if a < b, 0 if a == 0, > 0 if a > b
  */
 int		node_compare_number(const void *a, const void *b) {
-    struct node* aNode = (struct node*) a;
-    struct node* bNode = (struct node*) b;
+    struct node* aNode = *(struct node**) a;
+    struct node* bNode = *(struct node**) b;
     int aNum = aNode->number;
     int bNum = bNode->number;
     return (int) aNum - bNum;
@@ -87,10 +87,8 @@ int		node_compare_number(const void *a, const void *b) {
  * @return  < 0 if a < b, 0 if a == 0, > 0 if a > b
  */
 int		node_compare_string(const void *a, const void *b) {
-    struct node* aNode = (struct node*) a;
-    struct node* bNode = (struct node*) b;
-    char* aStr = aNode->string;
-    char* bStr = bNode->string;
-    /*printf("comparing %s and %s\n", aStr, bStr);*/
-    return strcmp(aStr, bStr);
+    struct node* aNode = *(struct node**) a;
+    struct node* bNode = *(struct node**) b;
+    int returnNum = strcmp(aNode->string, bNode->string);
+    return returnNum;
 }

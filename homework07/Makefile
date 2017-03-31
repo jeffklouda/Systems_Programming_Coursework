@@ -4,7 +4,7 @@ LD=		gcc
 LDFLAGS=	-L.
 AR=		ar
 ARFLAGS=	rcs
-TARGETS=	liblist.a lsort 
+TARGETS=	liblist.a lsort measure
 
 all:		$(TARGETS)
 
@@ -59,6 +59,10 @@ test-list:	test_list
 test-lsort:	lsort test_lsort.sh
 	@echo Testing lsort...
 	@./test_lsort.sh
+
+measure:	measure.c
+	@echo Making measure
+	@$(CC) measure.c $(CFLAGS) -o measure
 
 clean:
 	@echo Cleaning...

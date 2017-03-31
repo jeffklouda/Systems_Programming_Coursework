@@ -1,6 +1,7 @@
 /* list.c */
 
 #include "list.h"
+#include <stdlib.h>
 
 /* Internal Function Prototypes */
 
@@ -58,7 +59,7 @@ void		list_push_front(struct list *l, char *s) {
     
     // set head of list to this node
     l->head = newNode;
-    l->size++;
+    l->size += 1;
     // first node is also last if list is empty
     if (!l->tail)
         l->tail = newNode;
@@ -73,7 +74,7 @@ void		list_push_front(struct list *l, char *s) {
  */
 void		list_push_back(struct list *l, char *s) {
     struct node* newNode = node_create(s, NULL);
-    l->size++;
+    l->size += 1;
     if (l->tail) {
         (l->tail)->next = newNode;
         l->tail = newNode;
@@ -111,12 +112,13 @@ void		list_dump(struct list *l, FILE *stream) {
  * @return  Allocate array of pointers to nodes.
  */
 struct node **	list_to_array(struct list *l) {
-    struct node** arr = malloc(l->size * sizeof(struct node*));
+    struct node** arr = malloc((l->size) * sizeof(struct node*));
     struct node* node = l->head;
-    struct node** w = arr; // writer pointer
+    int i = 0;
+    /*struct node** w = arr; // writer pointer*/
     while (node) {
-        *w = node;
-        w++;
+        arr[i] = node;
+        i++;
         node = node->next;
     }
     return arr;
@@ -131,16 +133,18 @@ struct node **	list_to_array(struct list *l) {
  */
 void		list_qsort(struct list *l, node_compare f) {
     
-    struct node** arr = list_to_array(l);
-    
     if (l->size < 2)
         return;
  
+    struct node** arr = list_to_array(l);
+    
     qsort(arr, l->size, sizeof(struct node*), f);
+
     for (size_t i = 0; i < l->size - 1; i++) {
-        arr[i]->next = arr[i+1];
+        (arr[i])->next = arr[i+1];
     }
-    arr[l->size - 1]->next = NULL;
+
+    (arr[l->size - 1])->next = NULL;
     l->head = arr[0];
     l->tail = arr[l->size - 1];
     free(arr);
@@ -257,12 +261,12 @@ struct node *	merge(struct node *left, struct node *right, node_compare f) {
     struct node* head = node_create("tempHead", NULL);
     struct node* tail = head;
     while (right && left) {
-        if ( f(left, right) > 0 ) {
+        if ( f(&left, &right) > 0 ) {
             tail->next = right;
             tail = tail->next;
             right = right->next;
         }
-        else if ( f(left, right) < 0 ) {
+        else if ( f(&left, &right) < 0 ) {
             tail->next = left;
             tail = tail->next;
             left = left->next;

@@ -60,6 +60,7 @@ int main(int argc, char *argv[]) {
     }
 
     puts("QSort...");
+    list_dump(l, stdout); // TEST TEST
     list_qsort(l, node_compare_string);
     list_dump(l, stdout);
     for (n = l->head; n && n->next; n = n->next) {
@@ -79,10 +80,6 @@ int main(int argc, char *argv[]) {
     list_msort(l, node_compare_string);
     list_dump(l, stdout);
     for (n = l->head; n && n->next; n = n->next) {
-        /*node_dump(n, stdout);
-        node_dump(n->next, stdout);
-        printf("%d", node_compare_string(&n, &n->next));
-        puts("\n");*/
         assert(node_compare_string(&n, &n->next) < 0);
     }
     assert(l->tail == n);
